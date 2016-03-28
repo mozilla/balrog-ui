@@ -89,6 +89,13 @@
         Data version: <b>{{ release.data_version }}</b>
       </h5>
 
+      <h5 title="Rules referencing it">
+        Rules: [
+        <a ng-repeat="rule in release.rule_ids" href="/rules/{{ rule  }}">
+            {{ rule }}
+        </a> ]
+      </h5>
+
       <button class="btn btn-default btn-xs" ng-click="openDataModal(release)">View Data</button>
       <button ng-show="release_name" class="btn btn-default btn-xs" ng-click="openDiffModal(release)">View Diff</button>
     </div>
