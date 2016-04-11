@@ -14,6 +14,10 @@ function($scope, $http, $modalInstance, CSRF, Releases, releases) {
   Releases.getProducts().success(function(response) {
     $scope.products = response.product;
   });
+  $scope.channels = [];
+  Releases.getChannels().success(function(response) {
+    $scope.channels = response.channel;
+  });
 
   $scope.errors = {};
   $scope.saving = false;

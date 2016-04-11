@@ -10,6 +10,10 @@ function ($scope, $modalInstance, CSRF, Releases, release) {
   Releases.getProducts().success(function(response) {
     $scope.products = response.product;
   });
+  $scope.channels = [];
+  Releases.getChannels().success(function(response) {
+    $scope.channels = response.channel;
+  });
 
   $scope.saving = false;
 
