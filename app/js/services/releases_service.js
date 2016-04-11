@@ -12,6 +12,9 @@ angular.module("app").factory('Releases', function($http, $q) {
       });
       return deferred.promise;
     },
+    getChannels: function(){
+      return $http.get('/api/releases/columns/channel');
+    },
     getReleases: function() {
       return $http.get('/api/releases');
     },

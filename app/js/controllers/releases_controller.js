@@ -51,8 +51,8 @@ function($scope, $routeParams, $location, $timeout, Releases, Search, $modal) {
         value: "name"
       },
       {
-        text: "Product",
-        value: "product"
+        text: "Product, Channel",
+        value: "product,channel"
       },
       {
         text: "Product (reverse)",
