@@ -36,6 +36,19 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
   $scope.$watch('ordering_str', function(value) {
     $scope.ordering = value.value.split(',');
   });
+
+  $scope.pr_ch_options = [];
+  Rules.getProducts().success(function(response_prs) {
+    Rules.getChannels().success(function(response_chs) {
+      response_prs.product.forEach(function(pr) {
+        response_chs.channel.forEach(function(ch) {
+          var order = pr.concat(", ").concat(ch);
+          $scope.pr_ch_options.push({text: order, value: order});
+        });
+      });
+    });
+  });
+
   if ($scope.rule_id) {
     $scope.ordering_options = [
       {
@@ -60,7 +73,7 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
     ];
   }
   $scope.ordering_str = $scope.ordering_options[0];
-
+  $scope.pr_ch_str = $scope.pr_ch_options[0];
 
   $scope.currentPage = 1;
   $scope.pageSize = 10;  // default
