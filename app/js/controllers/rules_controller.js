@@ -23,6 +23,12 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
     Rules.getRules()
     .success(function(response) {
       $scope.rules = response.rules;
+      $scope.pairExists = function(pr, ch) {
+        var _rules = $scope.rules.filter(function(rule) {
+          return rule.product === pr && rule.channel === ch;
+        });
+        return _rules.length !== 0;
+      };
     })
     .error(function() {
       console.error(arguments);
@@ -41,13 +47,15 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
     $scope.pr_ch_selected = value.split(',');
   });
 
-  $scope.pr_ch_options = [];
+  $scope.pr_ch_options = ["All rules"];
   Rules.getProducts().success(function(response_prs) {
     Rules.getChannels().success(function(response_chs) {
       response_prs.product.forEach(function(pr) {
         response_chs.channel.forEach(function(ch) {
-          var pr_ch_pair = pr.concat(",").concat(ch);
-          $scope.pr_ch_options.push(pr_ch_pair);
+          if (!ch.contains("-") && !ch.contains("*") && $scope.pairExists(pr, ch)){
+            var pr_ch_pair = pr.concat(",").concat(ch);
+            $scope.pr_ch_options.push(pr_ch_pair);
+          }
         });
       });
     });
@@ -108,15 +116,15 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
   $scope.removeFilterSearchWord = Search.removeFilterSearchWord;
 
   $scope.filterBySelect = function(rule) {
-    channel = rule.channel && rule.channel.startsWith($scope.pr_ch_selected[1]);
-    product = rule.product === $scope.pr_ch_selected[0];
-    if (!rule.product && channel) {
-      return true;
+    if ($scope.pr_ch_selected && $scope.pr_ch_selected.length > 1) {
+      channel = rule.channel && rule.channel.startsWith($scope.pr_ch_selected[1]);
+      product = rule.product === $scope.pr_ch_selected[0];
+      if ((!rule.product && channel) || (!rule.channel && product)) {
+        return true;
+      }
+      return product && channel;
     }
-    if (!rule.channel && product) {
-      return true;
-    }
-    return product && channel;
+    return true;
   };
 
   $scope.openUpdateModal = function(rule) {
