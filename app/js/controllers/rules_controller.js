@@ -34,7 +34,7 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
         Rules.getChannels().success(function(response_chs) {
           response_prs.product.forEach(function(pr) {
             response_chs.channel.forEach(function(ch) {
-              if (!ch.contains("*") && pairExists(pr, ch)){
+              if (ch.indexOf("*") === -1 && pairExists(pr, ch)){
                 var pr_ch_pair = pr.concat(",").concat(ch);
                 $scope.pr_ch_options.push(pr_ch_pair);
               }
