@@ -5,6 +5,7 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
   $scope.failed = false;
 
   $scope.rule_id = parseInt($routeParams.id, 10);
+  $scope.pr_ch_options = ["All rules"];
   if ($scope.rule_id) {
     // history of a specific rule
     Rules.getHistory($scope.rule_id)
@@ -23,12 +24,24 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
     Rules.getRules()
     .success(function(response) {
       $scope.rules = response.rules;
-      $scope.pairExists = function(pr, ch) {
+      var pairExists = function(pr, ch) {
         var _rules = $scope.rules.filter(function(rule) {
           return rule.product === pr && rule.channel === ch;
         });
         return _rules.length !== 0;
       };
+      Rules.getProducts().success(function(response_prs) {
+        Rules.getChannels().success(function(response_chs) {
+          response_prs.product.forEach(function(pr) {
+            response_chs.channel.forEach(function(ch) {
+              if (!ch.contains("*") && pairExists(pr, ch)){
+                var pr_ch_pair = pr.concat(",").concat(ch);
+                $scope.pr_ch_options.push(pr_ch_pair);
+              }
+            });
+          });
+        });
+      });
     })
     .error(function() {
       console.error(arguments);
@@ -45,20 +58,6 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
 
   $scope.$watch('pr_ch_filter', function(value) {
     $scope.pr_ch_selected = value.split(',');
-  });
-
-  $scope.pr_ch_options = ["All rules"];
-  Rules.getProducts().success(function(response_prs) {
-    Rules.getChannels().success(function(response_chs) {
-      response_prs.product.forEach(function(pr) {
-        response_chs.channel.forEach(function(ch) {
-          if (!ch.contains("-") && !ch.contains("*") && $scope.pairExists(pr, ch)){
-            var pr_ch_pair = pr.concat(",").concat(ch);
-            $scope.pr_ch_options.push(pr_ch_pair);
-          }
-        });
-      });
-    });
   });
 
   if ($scope.rule_id) {
@@ -117,12 +116,9 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
 
   $scope.filterBySelect = function(rule) {
     if ($scope.pr_ch_selected && $scope.pr_ch_selected.length > 1) {
-      channel = rule.channel && rule.channel.startsWith($scope.pr_ch_selected[1]);
       product = rule.product === $scope.pr_ch_selected[0];
-      if ((!rule.product && channel) || (!rule.channel && product)) {
-        return true;
-      }
-      return product && channel;
+      channel = rule.channel && rule.channel === $scope.pr_ch_selected[1];
+      return (product || !rule.product) && (channel || !rule.channel || (rule.channel && rule.channel.indexOf("*") > -1 && $scope.pr_ch_selected[1].startsWith(rule.channel.split("*")[0])));
     }
     return true;
   };

@@ -29,12 +29,18 @@
     </div>
   </div>
   <div class="col-sm-6">
+    <div class="row">
+      <label>Product/Channel filter:</label>
       <select ng-model="pr_ch_filter" name="pr_ch_filter"
         ng-options="pr_ch_pair for pr_ch_pair in pr_ch_options.sort() track by pr_ch_pair">
       </select>
+    </div>
+    <div class="row">
+      <label>Order by:</label>
       <select ng-model="ordering_str" name="ordering_str"
         ng-options="o.text for o in ordering_options track by o.value">
       </select>
+    </div>
   </div>
 </div>
 <div class="undofilters" ng-show="!filtered_items.length" ng-cloak>

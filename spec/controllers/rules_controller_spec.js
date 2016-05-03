@@ -143,59 +143,49 @@ describe("controller: RulesController", function() {
     it("should be possible to open the add modal", function() {
       this.$httpBackend.expectGET('/api/rules')
       .respond(200, JSON.stringify(sample_rules));
-      this.$httpBackend.expectGET('/api/rules/columns/product')
-      .respond(200, JSON.stringify({product: ['Product1', 'Product2'], count: 2}));
       this.$httpBackend.expectGET('/api/releases?names_only=1')
       .respond(200, JSON.stringify({names: ['Name1', 'Name2']}));
       this.$httpBackend.expectGET('/api/rules/columns/channel')
       .respond(200, JSON.stringify({channel: ['Channel1', 'Channel2'], count: 2}));
-      this.scope.openNewRuleModal();
       this.$httpBackend.expectGET('/api/rules/columns/product')
       .respond(200, JSON.stringify({product: ['Product1', 'Product2'], count: 2}));
+      this.scope.openNewRuleModal();
     });
 
     it("should be possible to open the edit modal", function() {
       this.$httpBackend.expectGET('/api/rules')
       .respond(200, JSON.stringify(sample_rules));
-      this.$httpBackend.expectGET('/api/rules/columns/product')
-      .respond(200, JSON.stringify({product: ['Product1', 'Product2'], count: 2}));
       this.$httpBackend.expectGET('/api/releases?names_only=1')
       .respond(200, JSON.stringify({names: ['Name1', 'Name2']}));
       this.$httpBackend.expectGET('/api/rules/columns/channel')
       .respond(200, JSON.stringify({channel: ['Channel1', 'Channel2'], count: 2}));
-      this.scope.openUpdateModal();
       this.$httpBackend.expectGET('/api/rules/columns/product')
       .respond(200, JSON.stringify({product: ['Product1', 'Product2'], count: 2}));
+      this.scope.openUpdateModal();
     });
 
     it("should be possible to open the delete modal", function() {
       this.$httpBackend.expectGET('/api/rules')
       .respond(200, JSON.stringify(sample_rules));
-      this.$httpBackend.expectGET('/api/rules/columns/product')
-      .respond(200, JSON.stringify({product: ['Product1', 'Product2'], count: 2}));
       this.scope.openDeleteModal();
     });
 
     it("should be possible to open the revert modal", function() {
       this.$httpBackend.expectGET('/api/rules')
       .respond(200, JSON.stringify(sample_rules));
-      this.$httpBackend.expectGET('/api/rules/columns/product')
-      .respond(200, JSON.stringify({product: ['Product1', 'Product2'], count: 2}));
       this.scope.openRevertModal();
     });
 
     it("should be possible to open the duplicate modal", function() {
       this.$httpBackend.expectGET('/api/rules')
       .respond(200, JSON.stringify(sample_rules));
-      this.$httpBackend.expectGET('/api/rules/columns/product')
-      .respond(200, JSON.stringify({product: ['Product1', 'Product2'], count: 2}));
       this.$httpBackend.expectGET('/api/releases?names_only=1')
       .respond(200, JSON.stringify({names: ['Name1', 'Name2']}));
       this.$httpBackend.expectGET('/api/rules/columns/channel')
       .respond(200, JSON.stringify({channel: ['Channel1', 'Channel2'], count: 2}));
-      this.scope.openDuplicateModal(sample_rules.rules[0]);
       this.$httpBackend.expectGET('/api/rules/columns/product')
       .respond(200, JSON.stringify({product: ['Product1', 'Product2'], count: 2}));
+      this.scope.openDuplicateModal(sample_rules.rules[0]);
     });
   });
 
@@ -288,10 +278,6 @@ describe("controller: RulesController By Id", function() {
         expect($route.current).toBeUndefined();
         this.$httpBackend.expectGET('/api/rules/1/revisions')
         .respond(200, JSON.stringify(sample_revisions));
-        this.$httpBackend.expectGET('/api/rules/columns/product')
-        .respond(200, JSON.stringify({product: ['Product1', 'Product2'], count: 2}));
-        this.$httpBackend.expectGET('/api/rules/columns/channel')
-        .respond(200, JSON.stringify({channel: ['Channel1', 'Channel2'], count: 2}));
 
         $location.path('/rules/1');
         $rootScope.$digest();
