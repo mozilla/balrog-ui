@@ -43,6 +43,12 @@ angular.module("app").config(function($routeProvider, $locationProvider) {
     controller: 'RulesController',
     reloadOnSearch: false
   })
+
+  .when("/rules/scheduled_changes", {
+    templateUrl: "rule_scheduled_changes.html",
+    controller: "RuleScheduledChangesController",
+    reloadOnSearch: false
+  })
   ;
 
   $routeProvider.otherwise({ redirectTo: '/' });

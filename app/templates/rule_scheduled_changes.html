@@ -1,0 +1,149 @@
+<div loader ng-show="loading"></div>
+
+<h2>
+  <span>Scheduled Rule Changes</span> 
+
+  <span class="count">
+    ({{ filtered_items.length | number:0 }}
+    <span ng-bind="hasFilter() ? 'found' : 'in total'"></span>)
+  </span>
+
+  <button class="btn btn-primary btn-xs" ng-click="openNewScheduledRuleChangeModal()">
+    Add a new Scheduled Rule Change
+    <i class="glyphicon glyphicon-plus"></i>
+  </button>
+
+  <span class="text-right"><a href="/rules">Rules</a></span>
+
+</h2>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="pagination-container" ng-show="filtered_items.length > pageSize">
+      <pagination
+        class="pagination-sm"
+        total-items="filtered_items.length"
+        ng-model="currentPage"
+        items-per-page="pageSize"
+      ></pagination>
+    </div>
+  </div>
+  <div class="col-sm-6 text-right">
+    <div class="row">
+      <label>Order by:</label>
+      <select ng-model="ordering_str" name="ordering_str"
+        ng-options="o.text for o in ordering_options track by o.value">
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default" style="clear:right"
+     ng-repeat="sc in filtered_items = scheduled_changes | orderBy:ordering | startFrom:(currentPage - 1)*pageSize | limitTo:pageSize">
+  <div class="panel-heading">
+
+    <h3 class="panel-title">
+      <div style="float: right">
+        <button class="btn btn-default btn-xs" ng-click="openUpdateModal(rule)">Update</button>
+        <button class="btn btn-default btn-xs" ng-click="openDeleteModal(rule)">Delete</button>
+        <a class="btn btn-default btn-xs" ng-href="/scheduled_changes/rules/{{ sc.sc_id }}">History</a>
+      </div>
+
+      <i title="Product" ng-show="!sc.base_product">no product</i>
+      <b title="Product" ng-show="sc.base_product" ng-bind-html="highlightSearch(sc.base_product, 'product')"></b>
+      :
+      <i title="Channel" ng-show="!sc.base_channel">no channel</i>
+      <b title="Channel" ng-show="sc.base_channel" ng-bind-html="highlightSearch(sc.base_channel, 'channel')"></b>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <div class="left" style="float: left">
+
+      <h5 title="Mapping">
+        Mapping: <span ng-show="sc.base_mapping">
+            <b ng-bind-html="highlightSearch(sc.base_mapping, 'mapping')"></b>
+            <a class="btn btn-default btn-xs" href="" ng-click="openReleaseDataModal(sc.base_mapping)">
+                <i class="glyphicon glyphicon-eye-open"></i>
+                View
+            </a>
+        </span>
+      </h5>
+      <h5 title="Data version">
+        Data version: <b>{{ sc.data_version }}</b>
+      </h5>
+      <h5 title="Scheduled Change ID">
+        Scheduled Change ID: <b>{{ sc.sc_id }}</b>
+      </h5>
+      <h5 ng-show="sc.when" title="When">
+        When: <b>{{ sc.when }}</b>
+      </h5>
+      <h5 ng-show="sc.telemetry_product" title="Telemetry Product">
+        Telemetry Product: <b>{{ sc.telemetry_product }}</b>
+      </h5>
+      <h5 ng-show="sc.telemetry_channel" title="Telemetry Channel">
+        Telemetry Channel: <b>{{ sc.telemetry_channel }}</b>
+      </h5>
+      <h5 ng-show="sc.telemetry_uptake" title="Telemetry Uptake">
+        Telemetry Uptake: <b>{{ sc.telemetry_uptake }}</b>
+      </h5>
+      <h5 title="Scheduled By">
+        Scheduled By: <b>{{ sc.scheduled_by }}</b>
+      </h5>
+      <h5 title="Rule ID">
+        Rule ID: <b>{{ sc.base_rule_id }}</b>
+      </h5>
+      <h5 title="Rule data version">
+        Rule data version: <b>{{ sc.base_data_version }}</b>
+      </h5>
+
+      <p ng-if="sc.base_comment">
+        <b>Comment:</b>
+        <span ng-bind-html="highlightSearch(sc.base_comment, 'comment')"></span>
+      </p>
+
+    </div>
+
+    <dl class="dl-horizontal" style="float:right">
+      <dt ng-show="sc.base_alias" title="Can be used in place of rule_id in REST operations">Alias:</dt>
+      <dd>{{ sc.base_alias }}</dd>
+      <dt ng-show="sc.base_backgroundRate !== null">Rate:</dt>
+      <dd>{{ sc.base_backgroundRate }}</dd>
+      <dt ng-show="sc.base_priority !== null">Priority:</dt>
+      <dd>{{ sc.base_priority }}</dd>
+      <dt ng-show="sc.base_version">Version:</dt>
+      <dd>{{ sc.base_version }}</dd>
+      <dt ng-show="sc.base_buildID">Build ID:</dt>
+      <dd>{{ sc.base_buildID }}</dd>
+      <dt ng-show="sc.base_locale">Locale:</dt>
+      <dd>{{ sc.base_locale }}</dd>
+      <dt ng-show="sc.base_distribution">Distribution:</dt>
+      <dd>{{ sc.base_distribution }}</dd>
+      <dt ng-show="sc.base_buildTarget">Build Target:</dt>
+      <dd>{{ sc.base_buildTarget }}</dd>
+      <dt ng-show="sc.base_osVersion">OS Version:</dt>
+      <dd>{{ sc.base_osVersion }}</dd>
+      <dt ng-show="sc.base_systemCapabilities">System Capabilities:</dt>
+      <dd>{{ sc.base_systemCapabilities }}</dd>
+      <dt ng-show="sc.base_distVersion">Dist Version:</dt>
+      <dd>{{ sc.base_distVersion }}</dd>
+      <dt ng-show="sc.base_whitelist">Whitelist:</dt>
+      <dd>{{ sc.base_whitelist }}</dd>
+      <dt ng-show="sc.base_update_type">Update type:</dt>
+      <dd>{{ sc.base_update_type }}</dd>
+      <dt ng-show="sc.base_headerArchitecture">Header Architecture:</dt>
+      <dd>{{ sc.base_headerArchitecture }}</dd>
+    </dl>
+
+  </div>
+
+</div>
+
+
+<div class="pagination-container" ng-show="filtered_items.length > pageSize">
+  <pagination
+    class="pagination-sm"
+    total-items="filtered_items.length"
+    ng-model="currentPage"
+    items-per-page="pageSize"
+  ></pagination>
+</div>
