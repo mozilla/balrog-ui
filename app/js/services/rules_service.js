@@ -36,6 +36,26 @@ angular.module("app").factory('Rules', function($http) {
       data.csrf_token = csrf_token;
       return $http.post('/api/rules/' + id + '/revisions', data);
     },
+    getScheduledChanges: function() {
+      return $http.get("/api/scheduled_changes/rules");
+    },
+    getScheduledChange: function(sc_id) {
+      return $http.get("/api/scheduled_changes/rules/" + sc_id);
+    },
+    addScheduledChange: function(data, csrf_token) {
+      data.csrf_token = csrf_token;
+      return $http.post("/api/scheduled_changes/rules", data);
+    },
+    updateScheduledChange: function(sc_id, data, csrf_token) {
+      data.csrf_token = csrf_token;
+      return $http.post("/api/scheduled_changes/rules/" + sc_id, data);
+    },
+    deleteScheduledChange: function(sc_id, data, csrf_token) {
+      var url = "/api/scheduled_changes/rules/" + sc_id;
+      url += '?data_version=' + data.data_version;
+      url += '&csrf_token=' + encodeURIComponent(csrf_token);
+      return $http.delete(url);
+    },
   };
   return service;
 
