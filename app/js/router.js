@@ -32,6 +32,12 @@ angular.module("app").config(function($routeProvider, $locationProvider) {
     reloadOnSearch: false
   })
 
+  .when("/rules/scheduled_changes", {
+    templateUrl: "rule_scheduled_changes.html",
+    controller: "RuleScheduledChangesController",
+    reloadOnSearch: false
+  })
+
   .when('/rules', {
     templateUrl: 'rules.html',
     controller: 'RulesController',
@@ -41,12 +47,6 @@ angular.module("app").config(function($routeProvider, $locationProvider) {
   .when('/rules/:id', {
     templateUrl: 'rules.html',
     controller: 'RulesController',
-    reloadOnSearch: false
-  })
-
-  .when("/rules/scheduled_changes", {
-    templateUrl: "rule_scheduled_changes.html",
-    controller: "RuleScheduledChangesController",
     reloadOnSearch: false
   })
   ;
