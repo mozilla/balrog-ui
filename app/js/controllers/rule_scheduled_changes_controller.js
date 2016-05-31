@@ -15,4 +15,27 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
   .finally(function() {
     $scope.loading = false;
   });
+
+  $scope.openNewScheduledRuleChangeModal = function() {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'rule_scheduled_change_modal.html',
+      controller: 'NewRuleScheduledChangeCtrl',
+      // size: 'sm',
+      resolve: {
+        scheduled_changes: function() {
+          return $scope.scheduled_changes;
+        },
+        sc: function() {
+          // blank new default rule
+          return {
+            product: '',
+            backgroundRate: 0,
+            priority: 0,
+            update_type: 'minor',
+          };
+        }
+      }
+    });
+  };
 });

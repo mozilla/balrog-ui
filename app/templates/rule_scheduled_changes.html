@@ -44,25 +44,25 @@
 
     <h3 class="panel-title">
       <div style="float: right">
-        <button class="btn btn-default btn-xs" ng-click="openUpdateModal(rule)">Update</button>
-        <button class="btn btn-default btn-xs" ng-click="openDeleteModal(rule)">Delete</button>
+        <button class="btn btn-default btn-xs" ng-click="openUpdateModal(sc)">Update</button>
+        <button class="btn btn-default btn-xs" ng-click="openDeleteModal(sc)">Delete</button>
         <a class="btn btn-default btn-xs" ng-href="/scheduled_changes/rules/{{ sc.sc_id }}">History</a>
       </div>
 
-      <i title="Product" ng-show="!sc.base_product">no product</i>
-      <b title="Product" ng-show="sc.base_product" ng-bind-html="highlightSearch(sc.base_product, 'product')"></b>
+      <i title="Product" ng-show="!sc.product">no product</i>
+      <b title="Product" ng-show="sc.product" ng-bind-html="highlightSearch(sc.product, 'product')"></b>
       :
-      <i title="Channel" ng-show="!sc.base_channel">no channel</i>
-      <b title="Channel" ng-show="sc.base_channel" ng-bind-html="highlightSearch(sc.base_channel, 'channel')"></b>
+      <i title="Channel" ng-show="!sc.channel">no channel</i>
+      <b title="Channel" ng-show="sc.channel" ng-bind-html="highlightSearch(sc.channel, 'channel')"></b>
     </h3>
   </div>
   <div class="panel-body">
     <div class="left" style="float: left">
 
       <h5 title="Mapping">
-        Mapping: <span ng-show="sc.base_mapping">
-            <b ng-bind-html="highlightSearch(sc.base_mapping, 'mapping')"></b>
-            <a class="btn btn-default btn-xs" href="" ng-click="openReleaseDataModal(sc.base_mapping)">
+        Mapping: <span ng-show="sc.mapping">
+            <b ng-bind-html="highlightSearch(sc.mapping, 'mapping')"></b>
+            <a class="btn btn-default btn-xs" href="" ng-click="openReleaseDataModal(sc.mapping)">
                 <i class="glyphicon glyphicon-eye-open"></i>
                 View
             </a>
@@ -90,48 +90,48 @@
         Scheduled By: <b>{{ sc.scheduled_by }}</b>
       </h5>
       <h5 title="Rule ID">
-        Rule ID: <b>{{ sc.base_rule_id }}</b>
+        Rule ID: <b>{{ sc.rule_id }}</b>
       </h5>
       <h5 title="Rule data version">
-        Rule data version: <b>{{ sc.base_data_version }}</b>
+        Rule data version: <b>{{ sc.data_version }}</b>
       </h5>
 
-      <p ng-if="sc.base_comment">
+      <p ng-if="sc.comment">
         <b>Comment:</b>
-        <span ng-bind-html="highlightSearch(sc.base_comment, 'comment')"></span>
+        <span ng-bind-html="highlightSearch(sc.comment, 'comment')"></span>
       </p>
 
     </div>
 
     <dl class="dl-horizontal" style="float:right">
-      <dt ng-show="sc.base_alias" title="Can be used in place of rule_id in REST operations">Alias:</dt>
-      <dd>{{ sc.base_alias }}</dd>
-      <dt ng-show="sc.base_backgroundRate !== null">Rate:</dt>
-      <dd>{{ sc.base_backgroundRate }}</dd>
-      <dt ng-show="sc.base_priority !== null">Priority:</dt>
-      <dd>{{ sc.base_priority }}</dd>
-      <dt ng-show="sc.base_version">Version:</dt>
-      <dd>{{ sc.base_version }}</dd>
-      <dt ng-show="sc.base_buildID">Build ID:</dt>
-      <dd>{{ sc.base_buildID }}</dd>
-      <dt ng-show="sc.base_locale">Locale:</dt>
-      <dd>{{ sc.base_locale }}</dd>
-      <dt ng-show="sc.base_distribution">Distribution:</dt>
-      <dd>{{ sc.base_distribution }}</dd>
-      <dt ng-show="sc.base_buildTarget">Build Target:</dt>
-      <dd>{{ sc.base_buildTarget }}</dd>
-      <dt ng-show="sc.base_osVersion">OS Version:</dt>
-      <dd>{{ sc.base_osVersion }}</dd>
-      <dt ng-show="sc.base_systemCapabilities">System Capabilities:</dt>
-      <dd>{{ sc.base_systemCapabilities }}</dd>
-      <dt ng-show="sc.base_distVersion">Dist Version:</dt>
-      <dd>{{ sc.base_distVersion }}</dd>
-      <dt ng-show="sc.base_whitelist">Whitelist:</dt>
-      <dd>{{ sc.base_whitelist }}</dd>
-      <dt ng-show="sc.base_update_type">Update type:</dt>
-      <dd>{{ sc.base_update_type }}</dd>
-      <dt ng-show="sc.base_headerArchitecture">Header Architecture:</dt>
-      <dd>{{ sc.base_headerArchitecture }}</dd>
+      <dt ng-show="sc.alias" title="Can be used in place of rule_id in REST operations">Alias:</dt>
+      <dd>{{ sc.alias }}</dd>
+      <dt ng-show="sc.backgroundRate !== null">Rate:</dt>
+      <dd>{{ sc.backgroundRate }}</dd>
+      <dt ng-show="sc.priority !== null">Priority:</dt>
+      <dd>{{ sc.priority }}</dd>
+      <dt ng-show="sc.version">Version:</dt>
+      <dd>{{ sc.version }}</dd>
+      <dt ng-show="sc.buildID">Build ID:</dt>
+      <dd>{{ sc.buildID }}</dd>
+      <dt ng-show="sc.locale">Locale:</dt>
+      <dd>{{ sc.locale }}</dd>
+      <dt ng-show="sc.distribution">Distribution:</dt>
+      <dd>{{ sc.distribution }}</dd>
+      <dt ng-show="sc.buildTarget">Build Target:</dt>
+      <dd>{{ sc.buildTarget }}</dd>
+      <dt ng-show="sc.osVersion">OS Version:</dt>
+      <dd>{{ sc.osVersion }}</dd>
+      <dt ng-show="sc.systemCapabilities">System Capabilities:</dt>
+      <dd>{{ sc.systemCapabilities }}</dd>
+      <dt ng-show="sc.distVersion">Dist Version:</dt>
+      <dd>{{ sc.distVersion }}</dd>
+      <dt ng-show="sc.whitelist">Whitelist:</dt>
+      <dd>{{ sc.whitelist }}</dd>
+      <dt ng-show="sc.update_type">Update type:</dt>
+      <dd>{{ sc.update_type }}</dd>
+      <dt ng-show="sc.headerArchitecture">Header Architecture:</dt>
+      <dd>{{ sc.headerArchitecture }}</dd>
     </dl>
 
   </div>
