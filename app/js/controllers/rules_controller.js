@@ -36,6 +36,7 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
     Rules.getRules()
     .success(function(response) {
       $scope.rules = response.rules;
+      $scope.rules_count = response.count;
       var pairExists = function(pr, ch) {
         var _rules = $scope.rules.filter(function(rule) {
           return rule.product === pr && rule.channel === ch;

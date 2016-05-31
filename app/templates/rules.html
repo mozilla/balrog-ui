@@ -4,11 +4,7 @@
   <span ng-if="!rule_id">Rules</span>
   <span ng-if="rule_id">Revisions of a Rule</span>
 
-  <span class="count" ng-show="!rule_id">
-    ({{ filtered_items.length | number:0 }}
-    <span ng-bind="hasFilter() ? 'found' : 'in total'"></span>)
-  </span>
-  <span class="count" ng-show="rule_id">
+  <span class="count">
     ({{ rules_count | number:0 }}
     <span ng-bind="hasFilter() ? 'found' : 'in total'"></span>)
   </span>
@@ -26,7 +22,7 @@
     <div class="pagination-container" ng-show="rules_count > pageSize">
       <pagination
         class="pagination-sm"
-        total-items="rules_count"
+        total-items="rule_id ? rules_count : filtered_items.length"
         ng-model="currentPage"
         items-per-page="pageSize"
         max-size="maxSize"
@@ -62,7 +58,7 @@
 </div>
 
 <div class="panel panel-default" style="clear:right"
-     ng-repeat="rule in filtered_items = (rules | filter: filterBySelect) | orderBy:ordering | limitTo:pageSize">
+     ng-repeat="rule in filtered_items = (rules | filter: filterBySelect) | orderBy:ordering | startFrom:(disableFilter || !rule_id) && ((currentPage - 1)*pageSize) | limitTo:pageSize">
   <div class="panel-heading">
 
     <h3 class="panel-title">
@@ -151,10 +147,11 @@
 
 </div>
 
+
 <div class="pagination-container" ng-show="rules_count > pageSize">
   <pagination
     class="pagination-sm"
-    total-items="rules_count"
+    total-items="rule_id ? rules_count : filtered_items.length"
     ng-model="currentPage"
     items-per-page="pageSize"
     max-size="maxSize"
