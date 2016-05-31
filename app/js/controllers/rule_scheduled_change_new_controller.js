@@ -28,7 +28,7 @@ function($scope, $http, $modalInstance, CSRF, Releases, Rules, scheduled_changes
       Rules.addScheduledChange(sc, csrf_token)
       .success(function(response) {
         $scope.sc.sc_data_version = 1;
-        $scope.sc.sc_id = parseInt(response, 10);
+        $scope.sc.sc_id = response.sc_id;
         $scope.scheduled_changes.push($scope.sc);
         $modalInstance.close();
       })
