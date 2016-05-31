@@ -16,6 +16,28 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
     $scope.loading = false;
   });
 
+  $scope.$watch("ordering_str", function(value) {
+    $scope.ordering = value.value.split(",");
+  });
+
+  $scope.ordering_options = [
+    {
+      text: "When",
+      value: "when"
+    },
+    {
+      text: "Product, Channel",
+      value: "product,channel"
+    },
+  ];
+
+  $scope.ordering_str = $scope.ordering_options[0];
+
+  $scope.currentPage = 1;
+  $scope.pageSize = 10;
+
+  $scope.highlightSearch = Search.highlightSearch;
+
   $scope.openNewScheduledRuleChangeModal = function() {
 
     var modalInstance = $modal.open({
