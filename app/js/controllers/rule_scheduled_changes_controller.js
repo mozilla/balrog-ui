@@ -72,4 +72,19 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
       }
     });
   };
+
+  $scope.openDeleteModal = function(sc) {
+    var modalInstance = $modal.open({
+      templateUrl: "rule_scheduled_change_delete_modal.html",
+      controller: "DeleteRuleScheduledChangeCtrl",
+      resolve: {
+        sc: function() {
+          return sc;
+        },
+        scheduled_changes: function() {
+          return $scope.scheduled_changes;
+        }
+      }
+    });
+  };
 });
