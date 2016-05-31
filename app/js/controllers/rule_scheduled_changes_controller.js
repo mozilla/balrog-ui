@@ -60,4 +60,16 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
       }
     });
   };
+
+  $scope.openUpdateModal = function(sc) {
+    var modalInstance = $modal.open({
+      templateUrl: "rule_scheduled_change_modal.html",
+      controller: "EditRuleScheduledChangeCtrl",
+      resolve: {
+        sc: function() {
+          return sc;
+        }
+      }
+    });
+  };
 });
