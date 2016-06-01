@@ -38,6 +38,28 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
 
   $scope.highlightSearch = Search.highlightSearch;
 
+  $scope.state_filter = [
+    {
+      text: "Active",
+      value: "active",
+    },
+    {
+      text: "Completed",
+      value: "complete",
+    },
+  ];
+  $scope.state_str = $scope.state_filter[0];
+
+  $scope.filterBySelect = function(sc) {
+    if ($scope.state_str.value === "complete" && sc.complete) {
+      return true;
+    }
+    else if ($scope.state_str.value === "active" && !sc.complete) {
+      return true;
+    }
+    return false;
+  };
+
   $scope.openNewScheduledRuleChangeModal = function() {
 
     var modalInstance = $modal.open({
