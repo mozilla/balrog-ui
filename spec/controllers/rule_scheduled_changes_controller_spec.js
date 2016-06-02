@@ -21,7 +21,7 @@ describe("controller: RuleScheduledChangesController", function() {
   });
 
   var sample_sc = {
-    "count": 2,
+    "count": 3,
     "scheduled_changes": [
       {
         "sc_id": 1,
@@ -83,16 +83,78 @@ describe("controller: RuleScheduledChangesController", function() {
         "base_alias": null,
         "base_data_version": null,
       },
+      {
+        "sc_id": 3,
+        "scheduled_by": "mary",
+        "when": null,
+        "complete": true,
+        "telemetry_product": "firefox",
+        "telemetry_channel": "nightly",
+        "telemetry_uptake": 500,
+        "data_version": 1,
+        "base_rule_id": null,
+        "base_priority": 74,
+        "base_mapping": "firefox-10.0",
+        "base_backgroundRate": 50,
+        "base_update_type": "minor",
+        "base_product": "ff",
+        "base_version": null,
+        "base_channel": "nightly",
+        "base_buildTarget": null,
+        "base_buildID": null,
+        "base_locale": null,
+        "base_osVersion": null,
+        "base_systemCapabilities": null,
+        "base_distribution": null,
+        "base_distVersion": null,
+        "base_headerArchitecture": null,
+        "base_comment": null,
+        "base_whitelist": null,
+        "base_alias": null,
+        "base_data_version": null,
+      },
     ]
   };
 
   describe("fetching all scheduled changes", function() {
-    it("should return all scheduled changes", function() {
+    it("should find no scheduled changes", function() {
+      this.$httpBackend.expectGET("/api/scheduled_changes/rules")
+      .respond(200, '{"scheduled_changes": [], "count": 0}');
+      this.$httpBackend.flush();
+      expect(this.scope.scheduled_changes.length).toEqual(0);
+      expect(this.scope.scheduled_changes).toEqual([]);
+    });
+
+    it("should find all scheduled changes", function() {
       this.$httpBackend.expectGET("/api/scheduled_changes/rules")
       .respond(200, JSON.stringify(sample_sc));
       this.$httpBackend.flush();
-      expect(this.scope.scheduled_changes.length).toEqual(2);
+      expect(this.scope.scheduled_changes.length).toEqual(3);
       expect(this.scope.scheduled_changes).toEqual(sample_sc.scheduled_changes);
+    });
+  });
+
+  describe("filter by select", function() {
+    it("should filter active scheduled changes correctly", function() {
+      this.$httpBackend.expectGET("/api/scheduled_changes/rules")
+      .respond(200, JSON.stringify(sample_sc));
+      this.$httpBackend.flush();
+
+      this.scope.state_str.value = "active";
+      var $filtered = this.scope.scheduled_changes.filter(this.scope.filterBySelect);
+      var $expected = this.scope.scheduled_changes.slice(0, 2);
+      expect($filtered).toEqual($expected);
+    });
+
+    it("should filter completed scheduled changes correctly", function() {
+      this.$httpBackend.expectGET("/api/scheduled_changes/rules")
+      .respond(200, JSON.stringify(sample_sc));
+      this.$httpBackend.flush();
+
+      this.scope.state_str.value = "complete";
+      var $filtered = this.scope.scheduled_changes.filter(this.scope.filterBySelect);
+      var $expected = this.scope.scheduled_changes.slice(2, 3);
+      expect($filtered).toEqual($expected);
     });
   });
 });
