@@ -52,7 +52,7 @@ angular.module("app").factory('Rules', function($http) {
     },
     deleteScheduledChange: function(sc_id, data, csrf_token) {
       var url = "/api/scheduled_changes/rules/" + sc_id;
-      url += '?data_version=' + data.data_version;
+      url += '?data_version=' + data.sc_data_version;
       url += '&csrf_token=' + encodeURIComponent(csrf_token);
       return $http.delete(url);
     },
