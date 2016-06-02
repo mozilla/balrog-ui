@@ -157,4 +157,42 @@ describe("controller: RuleScheduledChangesController", function() {
       expect($filtered).toEqual($expected);
     });
   });
+
+  describe("opening modals", function() {
+    it("should be possible to open the add modal", function() {
+      this.$httpBackend.expectGET("/api/scheduled_changes/rules")
+      .respond(200, JSON.stringify(sample_sc));
+      this.$httpBackend.flush();
+
+      this.scope.openNewScheduledRuleChangeModal();
+      this.$httpBackend.expectGET('/api/releases?names_only=1')
+      .respond(200, JSON.stringify({names: ['Name1', 'Name2']}));
+      this.$httpBackend.expectGET('/api/rules/columns/channel')
+      .respond(200, JSON.stringify({channel: ['Channel1', 'Channel2'], count: 2}));
+      this.$httpBackend.expectGET('/api/rules/columns/product')
+      .respond(200, JSON.stringify({product: ['Product1', 'Product2'], count: 2}));
+    });
+
+    it("should be possible to open the update modal", function() {
+      this.$httpBackend.expectGET("/api/scheduled_changes/rules")
+      .respond(200, JSON.stringify(sample_sc));
+      this.$httpBackend.flush();
+
+      this.scope.openUpdateModal();
+      this.$httpBackend.expectGET('/api/releases?names_only=1')
+      .respond(200, JSON.stringify({names: ['Name1', 'Name2']}));
+      this.$httpBackend.expectGET('/api/rules/columns/channel')
+      .respond(200, JSON.stringify({channel: ['Channel1', 'Channel2'], count: 2}));
+      this.$httpBackend.expectGET('/api/rules/columns/product')
+      .respond(200, JSON.stringify({product: ['Product1', 'Product2'], count: 2}));
+    });
+
+    it("should be possible to open the delete modal", function() {
+      this.$httpBackend.expectGET("/api/scheduled_changes/rules")
+      .respond(200, JSON.stringify(sample_sc));
+      this.$httpBackend.flush();
+
+      this.scope.openDeleteModal();
+    });
+  });
 });
