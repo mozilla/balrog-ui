@@ -67,7 +67,7 @@
         Scheduled By: <b>{{ sc.scheduled_by }}</b>
       </h5>
       <h5 ng-show="sc.when" title="When">
-        When: <b>{{ sc.when }}</b>
+        When: <b>{{ sc.when | date:'medium' }}</b>
       </h5>
       <h5 ng-show="sc.telemetry_product" title="Telemetry Product">
         Telemetry Product: <b>{{ sc.telemetry_product }}</b>
