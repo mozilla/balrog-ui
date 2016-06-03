@@ -63,21 +63,8 @@
   </div>
   <div class="panel-body">
     <div class="left" style="float: left">
-
-      <h5 title="Mapping">
-        Mapping: <span ng-show="sc.mapping">
-            <b ng-bind-html="highlightSearch(sc.mapping, 'mapping')"></b>
-            <a class="btn btn-default btn-xs" href="" ng-click="openReleaseDataModal(sc.mapping)">
-                <i class="glyphicon glyphicon-eye-open"></i>
-                View
-            </a>
-        </span>
-      </h5>
-      <h5 title="Data version">
-        Data version: <b>{{ sc.sc_data_version }}</b>
-      </h5>
-      <h5 title="Scheduled Change ID">
-        Scheduled Change ID: <b>{{ sc.sc_id }}</b>
+      <h5 title="Scheduled By">
+        Scheduled By: <b>{{ sc.scheduled_by }}</b>
       </h5>
       <h5 ng-show="sc.when" title="When">
         When: <b>{{ sc.when }}</b>
@@ -91,24 +78,27 @@
       <h5 ng-show="sc.telemetry_uptake" title="Telemetry Uptake">
         Telemetry Uptake: <b>{{ sc.telemetry_uptake }}</b>
       </h5>
-      <h5 title="Scheduled By">
-        Scheduled By: <b>{{ sc.scheduled_by }}</b>
+      <h5 title="Scheduled Change ID">
+        Scheduled Change ID: <b>{{ sc.sc_id }}</b>
       </h5>
-      <h5 title="Rule ID">
-        Rule ID: <b>{{ sc.rule_id }}</b>
+      <h5 title="Data Version">
+        Data version: <b>{{ sc.sc_data_version }}</b>
       </h5>
-      <h5 title="Rule data version">
-        Rule data version: <b>{{ sc.data_version }}</b>
-      </h5>
-
-      <p ng-if="sc.comment">
-        <b>Comment:</b>
-        <span ng-bind-html="highlightSearch(sc.comment, 'comment')"></span>
-      </p>
-
     </div>
 
     <dl class="dl-horizontal" style="float:right">
+      <dt ng-show="sc.rule_id">Rule ID:</dt>
+      <dd>{{ sc.rule_id }}</dd>
+      <dt ng-show="sc.data_version">Data Version:</dt>
+      <dd>{{ sc.data_version }}</dd>
+      <dt ng-show="sc.mapping">Mapping:</dt>
+      <dd>
+        <span ng-bind-html="highlightSearch(sc.mapping, 'mapping')"></span>
+        <a class="btn btn-default btn-xs" href="" ng-click="openReleaseDataModal(sc.mapping)">
+          <i class="glyphicon glyphicon-eye-open"></i>
+            View
+        </a>
+      </dd>
       <dt ng-show="sc.alias" title="Can be used in place of rule_id in REST operations">Alias:</dt>
       <dd>{{ sc.alias }}</dd>
       <dt ng-show="sc.backgroundRate !== null">Rate:</dt>
@@ -137,6 +127,8 @@
       <dd>{{ sc.update_type }}</dd>
       <dt ng-show="sc.headerArchitecture">Header Architecture:</dt>
       <dd>{{ sc.headerArchitecture }}</dd>
+      <dt ng-show="sc.comment">Comment:</dt>
+      <dd>{{ sc.comment }}</dd>
     </dl>
 
   </div>
