@@ -148,6 +148,23 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
   };
   /* End openUpdateModal */
 
+  $scope.openNewScheduledRuleChangeModal = function(rule) {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'rule_scheduled_change_modal.html',
+      controller: 'NewRuleScheduledChangeCtrl',
+      // size: 'sm',
+      resolve: {
+        scheduled_changes: function() {
+          return [];
+        },
+        sc: function() {
+          return angular.copy(rule);
+        }
+      }
+    });
+  };
+
   $scope.openDeleteModal = function(rule) {
 
     var modalInstance = $modal.open({
