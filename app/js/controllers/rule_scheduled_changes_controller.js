@@ -36,8 +36,6 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
   $scope.currentPage = 1;
   $scope.pageSize = 10;
 
-  $scope.highlightSearch = Search.highlightSearch;
-
   $scope.state_filter = [
     {
       text: "Active",
