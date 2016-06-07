@@ -7,8 +7,14 @@
     <div>Scheduled Change Details:</div>
     <div class="form-group" ng-class="{'has-error': errors.when}">
       <label for="id_distribution">When</label>
-      <input type="text" class="form-control" id="id_when" ng-model="sc.when">
-      <p class="help-block" ng-show="errors.when">{{ errors.when.join(', ') }}</p>
+      <div class="col-sm-10">
+        <p class="input-group">
+          <input type="text" class="form-control" datetime-picker="MM/dd/yyyy HH:mm", ng-model="sc.when" is-open="sc.when">
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="openCalendar($event)"><i class="fa fa-calendar"></i></button>
+          </span>
+        </p>
+      </div>
     </div>
     <div class="form-group" ng-class="{'has-error': errors.telemetry_product}">
       <label for="id_distribution">Telemetry Product</label>
