@@ -23,8 +23,6 @@ module.exports = function(lineman) {
         "vendor/js/localforage.min.js",
         "vendor/js/angular-localForage.min.js",
 
-        "vendor/js/datetime-picker.js",
-
         // "vendor/js/**/*.js"
         // "vendor/js/**/*.js"
       ],
