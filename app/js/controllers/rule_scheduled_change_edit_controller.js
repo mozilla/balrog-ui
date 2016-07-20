@@ -21,6 +21,10 @@ function ($scope, $modalInstance, CSRF, Rules, Releases, sc) {
   $scope.errors = {};
   $scope.saving = false;
 
+  $scope.clearWhen = function () {
+    $scope.sc.when = null;
+  };
+
   $scope.saveChanges = function () {
     $scope.saving = true;
 
