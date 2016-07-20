@@ -26,7 +26,6 @@ module.exports = function(lineman) {
         "vendor/js/bootstrap.min.js",
 
         "vendor/js/datetimepicker.js",
-        "vendor/js/datetimepicker.templates.js",
 
         // "vendor/js/**/*.js"
 
