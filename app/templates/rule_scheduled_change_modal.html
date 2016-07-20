@@ -35,10 +35,10 @@
       <p class="help-block" ng-show="errors.telemetry_uptake">{{ errors.telemetry_uptake.join(', ') }}</p>
     </div>
     <div>Rule Details:</div>
-    <div class="form-group" ng-class="{'has-error': errors.alias}">
-      <label for="id_distribution">(TODO: ID or Alias)</label>
-      <input type="text" class="form-control" id="id_alias" ng-model="sc.alias">
-      <p class="help-block" ng-show="errors.alias">{{ errors.alias.join(', ') }}</p>
+    <div class="form-group" ng-class="{'has-error': errors.rule_id}">
+      <label for="id_rule_id">ID or Alias:</label>
+      <input type="text" class="form-control" id="id_rule_id" ng-model="sc.rule_id">
+      <p class="help-block" ng-show="errors.rule_id">{{ errors.rule_id.join(', ') }}</p>
     </div>
     <div class="form-group" ng-class="{'has-error': errors.product}">
       <label for="id_product">Product</label>
