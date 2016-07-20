@@ -87,6 +87,7 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
       controller: "EditRuleScheduledChangeCtrl",
       resolve: {
         sc: function() {
+          sc.when = new Date(sc.when);
           return sc;
         }
       }

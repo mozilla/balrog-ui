@@ -22,7 +22,6 @@ function($scope, $http, $modalInstance, CSRF, Releases, Rules, scheduled_changes
   $scope.saveChanges = function() {
     $scope.saving = true;
     $scope.errors = {};
-    // TODO: convert sc.when to timestamp value
     CSRF.getToken()
     .then(function(csrf_token) {
       sc = angular.copy($scope.sc);
