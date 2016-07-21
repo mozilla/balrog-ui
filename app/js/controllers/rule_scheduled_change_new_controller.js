@@ -19,9 +19,13 @@ function($scope, $http, $modalInstance, CSRF, Releases, Rules, scheduled_changes
   $scope.errors = {};
   $scope.saving = false;
 
+  $scope.clearWhen = function () {
+    $scope.sc.when = null;
+  };
+
   $scope.saveChanges = function() {
     $scope.saving = true;
-    $scope.errors = {};
+
     CSRF.getToken()
     .then(function(csrf_token) {
       sc = angular.copy($scope.sc);
