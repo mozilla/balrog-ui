@@ -130,6 +130,8 @@
       <p class="help-block" ng-show="errors.comment">{{ errors.comment.join(', ') }}</p>
     </div>
 
+    <p class="help-block" ng-show="errors.exception">{{ errors.exception }}</p>
+
     <input type="hidden" name="sc_data_version" ng-model="sc.sc_data_version">
     <input type="hidden" name="data_version" ng-model="sc.data_version">
     <input type="hidden" name="rule_id" ng-model="sc.rule_id">
