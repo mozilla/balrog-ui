@@ -6,17 +6,17 @@
   <form role="form">
     <div>Scheduled Change Details:</div>
     <label for="id_when">When</label>
-    <div class="form-group" ng-class="{'has-error': errors.when}">
-      <div class="dropdown">
-        <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
-          <div class="input-group"><input type="text" id="id_when" class="form-control" data-ng-model="sc.when"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><span class="input-group-addon" href="" ng-click="clearWhen()">Clear</span>
+    <div class="form-group dropdown" ng-class="{'has-error': errors.when}">
+        <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#dropdown-element" href="#">
+          <div class="input-group">
+            <input type="text" id="id_when" class="form-control" data-ng-model="sc.when">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
           </div>
         </a>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-          <datetimepicker data-ng-model="sc.when" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minuteStep: 15 }"/>
-        </ul>
-      </div>
-      <!--<input type="text" class="form-control" id="id_when" ng-model="sc.when">-->
+        <a role="button" href="#" ng-click="clearWhen()"><span class="input-group-addon">Clear</span></a>
+      <ul class="dropdown-menu" id="dropdown-element" role="menu" aria-labelledby="dLabel">
+        <datetimepicker data-ng-model="sc.when" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minuteStep: 15 }"/>
+      </ul>
       <p class="help-block" ng-show="errors.when">{{ errors.when.join(', ') }}</p>
     </div>
     <div class="form-group" ng-class="{'has-error': errors.telemetry_product}">
