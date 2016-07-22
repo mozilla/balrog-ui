@@ -37,7 +37,7 @@ angular.module("app").factory('Rules', function($http) {
       return $http.post('/api/rules/' + id + '/revisions', data);
     },
     getScheduledChanges: function() {
-      return $http.get("/api/scheduled_changes/rules");
+      return $http.get("/api/scheduled_changes/rules?all=1");
     },
     getScheduledChange: function(sc_id) {
       return $http.get("/api/scheduled_changes/rules/" + sc_id);
