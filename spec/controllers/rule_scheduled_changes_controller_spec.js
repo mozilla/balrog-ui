@@ -117,16 +117,8 @@ describe("controller: RuleScheduledChangesController", function() {
   };
 
   describe("fetching all scheduled changes", function() {
-    it("should find no scheduled changes", function() {
-      this.$httpBackend.expectGET("/api/scheduled_changes/rules")
-      .respond(200, '{"scheduled_changes": [], "count": 0}');
-      this.$httpBackend.flush();
-      expect(this.scope.scheduled_changes.length).toEqual(0);
-      expect(this.scope.scheduled_changes).toEqual([]);
-    });
-
     it("should find all scheduled changes", function() {
-      this.$httpBackend.expectGET("/api/scheduled_changes/rules")
+      this.$httpBackend.expectGET("/api/scheduled_changes/rules?all=1")
       .respond(200, JSON.stringify(sample_sc));
       this.$httpBackend.flush();
       expect(this.scope.scheduled_changes.length).toEqual(3);
@@ -136,7 +128,7 @@ describe("controller: RuleScheduledChangesController", function() {
 
   describe("filter by select", function() {
     it("should filter active scheduled changes correctly", function() {
-      this.$httpBackend.expectGET("/api/scheduled_changes/rules")
+      this.$httpBackend.expectGET("/api/scheduled_changes/rules?all=1")
       .respond(200, JSON.stringify(sample_sc));
       this.$httpBackend.flush();
 
@@ -147,7 +139,7 @@ describe("controller: RuleScheduledChangesController", function() {
     });
 
     it("should filter completed scheduled changes correctly", function() {
-      this.$httpBackend.expectGET("/api/scheduled_changes/rules")
+      this.$httpBackend.expectGET("/api/scheduled_changes/rules?all=1")
       .respond(200, JSON.stringify(sample_sc));
       this.$httpBackend.flush();
 
@@ -160,7 +152,7 @@ describe("controller: RuleScheduledChangesController", function() {
 
   describe("opening modals", function() {
     it("should be possible to open the add modal", function() {
-      this.$httpBackend.expectGET("/api/scheduled_changes/rules")
+      this.$httpBackend.expectGET("/api/scheduled_changes/rules?all=1")
       .respond(200, JSON.stringify(sample_sc));
       this.$httpBackend.flush();
 
@@ -173,12 +165,26 @@ describe("controller: RuleScheduledChangesController", function() {
       .respond(200, JSON.stringify({product: ['Product1', 'Product2'], count: 2}));
     });
 
-    it("should be possible to open the update modal", function() {
-      this.$httpBackend.expectGET("/api/scheduled_changes/rules")
+    it("should be possible to open the update modal for time based change", function() {
+      this.$httpBackend.expectGET("/api/scheduled_changes/rules?all=1")
       .respond(200, JSON.stringify(sample_sc));
       this.$httpBackend.flush();
 
-      this.scope.openUpdateModal();
+      this.scope.openUpdateModal(sample_sc.scheduled_changes[0]);
+      this.$httpBackend.expectGET('/api/releases?names_only=1')
+      .respond(200, JSON.stringify({names: ['Name1', 'Name2']}));
+      this.$httpBackend.expectGET('/api/rules/columns/channel')
+      .respond(200, JSON.stringify({channel: ['Channel1', 'Channel2'], count: 2}));
+      this.$httpBackend.expectGET('/api/rules/columns/product')
+      .respond(200, JSON.stringify({product: ['Product1', 'Product2'], count: 2}));
+    });
+
+    it("should be possible to open the update modal for telemetry change", function() {
+      this.$httpBackend.expectGET("/api/scheduled_changes/rules?all=1")
+      .respond(200, JSON.stringify(sample_sc));
+      this.$httpBackend.flush();
+
+      this.scope.openUpdateModal(sample_sc.scheduled_changes[1]);
       this.$httpBackend.expectGET('/api/releases?names_only=1')
       .respond(200, JSON.stringify({names: ['Name1', 'Name2']}));
       this.$httpBackend.expectGET('/api/rules/columns/channel')
@@ -188,8 +194,8 @@ describe("controller: RuleScheduledChangesController", function() {
     });
 
     it("should be possible to open the delete modal", function() {
-      this.$httpBackend.expectGET("/api/scheduled_changes/rules")
-      .respond(200, JSON.stringify(sample_sc));
+      this.$httpBackend.expectGET("/api/scheduled_changes/rules?all=1")
+      .respond(200, JSON.stringify(sample_sc.scheduled_changes[0]));
       this.$httpBackend.flush();
 
       this.scope.openDeleteModal();
