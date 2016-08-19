@@ -43,6 +43,7 @@ angular.module("app").factory('Rules', function($http) {
       return $http.get("/api/scheduled_changes/rules/" + sc_id);
     },
     addScheduledChange: function(data, csrf_token) {
+      data = jQuery.extend({}, data);
       if (data.when === null) {
         data.when = "";
       }
@@ -53,6 +54,7 @@ angular.module("app").factory('Rules', function($http) {
       return $http.post("/api/scheduled_changes/rules", data);
     },
     updateScheduledChange: function(sc_id, data, csrf_token) {
+      data = jQuery.extend({}, data);
       if (data.when === null) {
         data.when = "";
       }
