@@ -345,6 +345,7 @@
               var selectedDate = moment.utc(unixDate).startOf('hour');
               var previousViewDate = moment.utc(selectedDate).startOf('day');
               var activeFormat = ngModelController.$modelValue ? moment(ngModelController.$modelValue).format('YYYY-MM-DD H:mm') : '';
+              var offsetString = "GMT" + new Date().toString().split("GMT").slice(-1);
 
               var result = {
                 'previousView': 'hour',
@@ -352,7 +353,7 @@
                 'nextView': 'setTime',
                 'previousViewDate': new DateObject({
                   utcDateValue: previousViewDate.valueOf(),
-                  display: selectedDate.format('lll')
+                  display: selectedDate.format('MMM D YYYY HH:mm ') + offsetString
                 }),
                 'leftDate': new DateObject({utcDateValue: moment.utc(selectedDate).subtract(1, 'hours').valueOf()}),
                 'rightDate': new DateObject({utcDateValue: moment.utc(selectedDate).add(1, 'hours').valueOf()}),
