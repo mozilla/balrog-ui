@@ -9,15 +9,16 @@
     <div class="form-group dropdown" ng-class="{'has-error': errors.when}">
         <!-- TODO: why doesn't it close properly? -->
         <!-- this seems to be caused by an old version of ui.bootstrap. can't upgrade it without upgrading angular though -->
-        <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown">
           <div class="input-group">
+            <span class="input-group-btn dropdown-toggle" data-toggle="dropdown">
+                <button class="btn btn-secondary" type="button"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
             <input type="text" id="id_when" class="form-control" data-ng-model="sc.when">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            <span class="input-group-btn"><button class="btn btn-secondary" type="button" ng-click="clearWhen()">Clear</button></span>
           </div>
-        </a>
-        <a role="button" href="#" ng-click="clearWhen()"><span class="input-group-addon">Clear</span></a>
       <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-        <datetimepicker data-ng-model="sc.when" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minuteStep: 15 }"/>
+        <datetimepicker data-ng-model="sc.when" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minuteStep: 15 }"
+                        data-on-set-time="validateWhen(newDate)" />
       </ul>
       <p class="help-block" ng-show="errors.when">{{ errors.when.join(', ') }}</p>
     </div>

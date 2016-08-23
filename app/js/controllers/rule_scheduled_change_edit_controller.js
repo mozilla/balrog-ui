@@ -21,8 +21,18 @@ function ($scope, $modalInstance, CSRF, Rules, Releases, sc) {
   $scope.errors = {};
   $scope.saving = false;
 
+  $scope.validateWhen = function(newDate) {
+    if (newDate <= new Date()) {
+      $scope.errors.when = ["Scheduled time cannot be in the past"];
+    }
+    else {
+      $scope.errors.when = null;
+    }
+  };
+
   $scope.clearWhen = function () {
     $scope.sc.when = null;
+    $scope.errors.when = null;
   };
 
   $scope.saveChanges = function () {
