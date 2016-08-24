@@ -43,9 +43,10 @@
     </div>
     <hr>
     <h4>Rule Details</h4>
-    <div class="form-group" ng-class="{'has-error': errors.rule_id}">
+    <div class="form-group" ng-class="{'has-error': errors.rule_id}" ng-show="is_edit">
       <label for="id_rule_id">ID or Alias</label>
-      <input type="text" class="form-control" id="id_rule_id" ng-model="sc.rule_id">
+      <input type="text" class="form-control" id="id_rule_id" ng-model="sc.rule_id" ng-if="is_edit">
+      <input type="hidden" class="form-control" id="id_rule_id" ng-model="sc.rule_id" ng-if="!is_edit">
       <p class="help-block" ng-show="errors.rule_id">{{ errors.rule_id.join(', ') }}</p>
     </div>
     <div class="form-group" ng-class="{'has-error': errors.product}">
