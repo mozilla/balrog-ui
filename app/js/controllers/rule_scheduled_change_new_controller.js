@@ -23,6 +23,7 @@ function($scope, $http, $modalInstance, CSRF, Releases, Rules, scheduled_changes
     $("#dropdown")[0].classList.remove("open");
     if (newDate <= new Date()) {
       $scope.errors.when = ["Scheduled time cannot be in the past"];
+      $scope.sc.when = null;
     }
     else {
       $scope.errors.when = null;
