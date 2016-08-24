@@ -4,42 +4,48 @@
 </div>
 <div class="modal-body">
   <form role="form">
-    <div>Scheduled Change Details:</div>
-    <label for="id_when">When</label>
-    <div id="dropdown" class="form-group dropdown" ng-class="{'has-error': errors.when}">
-        <!-- TODO: why doesn't it close properly? -->
-        <!-- this seems to be caused by an old version of ui.bootstrap. can't upgrade it without upgrading angular though -->
-          <div class="input-group">
-            <span class="input-group-btn dropdown-toggle" data-toggle="dropdown">
-                <button class="btn btn-secondary" type="button"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-            <input type="text" id="id_when" class="form-control" data-ng-model="sc.when">
-            <span class="input-group-btn"><button class="btn btn-secondary" type="button" ng-click="clearWhen()">Clear</button></span>
-          </div>
-      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-        <datetimepicker data-ng-model="sc.when" data-datetimepicker-config="{ minuteStep: 15 }"
-                        data-on-set-time="setWhen(newDate)" />
-      </ul>
-      <p class="help-block" ng-show="errors.when">{{ errors.when.join(', ') }}</p>
+    <h4>Scheduled Change Details</h4>
+    <div class="xor-group">
+      <div>
+        <label for="id_when">When</label>
+        <div id="dropdown" class="form-group dropdown" ng-class="{'has-error': errors.when}">
+              <div class="input-group">
+                <span class="input-group-btn dropdown-toggle" data-toggle="dropdown">
+                    <button class="btn btn-secondary" type="button"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+                <input type="text" id="id_when" class="form-control" data-ng-model="sc.when">
+                <span class="input-group-btn"><button class="btn btn-secondary" type="button" ng-click="clearWhen()">Clear</button></span>
+              </div>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <datetimepicker data-ng-model="sc.when" data-datetimepicker-config="{ minuteStep: 15 }"
+                            data-on-set-time="setWhen(newDate)" />
+          </ul>
+          <p class="help-block" ng-show="errors.when">{{ errors.when.join(', ') }}</p>
+        </div>
+      </div>
+      <h5>OR</h5>
+      <div>
+        <div class="form-group" ng-class="{'has-error': errors.telemetry_product}">
+          <label for="id_telemetry_product">Telemetry Product</label>
+          <input type="text" class="form-control" id="id_telemetry_product" ng-model="sc.telemetry_product">
+          <p class="help-block" ng-show="errors.telemetry_product">{{ errors.telemetry_product.join(', ') }}</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': errors.telemetry_channel}">
+          <label for="id_telemetry_channel">Telemetry Channel</label>
+          <input type="text" class="form-control" id="id_telemetry_channel" ng-model="sc.telemetry_channel">
+          <p class="help-block" ng-show="errors.telemetry_channel">{{ errors.telemetry_channel.join(', ') }}</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': errors.telemetry_uptake}">
+          <label for="id_telemetry_uptake">Telemetry Uptake</label>
+          <input type="text" class="form-control" id="id_telemetry_uptake" ng-model="sc.telemetry_uptake">
+          <p class="help-block" ng-show="errors.telemetry_uptake">{{ errors.telemetry_uptake.join(', ') }}</p>
+        </div>
+      </div>
     </div>
-    <div class="form-group" ng-class="{'has-error': errors.telemetry_product}">
-      <label for="id_telemetry_product">Telemetry Product</label>
-      <input type="text" class="form-control" id="id_telemetry_product" ng-model="sc.telemetry_product">
-      <p class="help-block" ng-show="errors.telemetry_product">{{ errors.telemetry_product.join(', ') }}</p>
-    </div>
-    <div class="form-group" ng-class="{'has-error': errors.telemetry_channel}">
-      <label for="id_telemetry_channel">Telemetry Channel</label>
-      <input type="text" class="form-control" id="id_telemetry_channel" ng-model="sc.telemetry_channel">
-      <p class="help-block" ng-show="errors.telemetry_channel">{{ errors.telemetry_channel.join(', ') }}</p>
-    </div>
-    <div class="form-group" ng-class="{'has-error': errors.telemetry_uptake}">
-      <label for="id_telemetry_uptake">Telemetry Uptake</label>
-      <input type="text" class="form-control" id="id_telemetry_uptake" ng-model="sc.telemetry_uptake">
-      <p class="help-block" ng-show="errors.telemetry_uptake">{{ errors.telemetry_uptake.join(', ') }}</p>
-    </div>
-    <div>Rule Details:</div>
+    <hr>
+    <h4>Rule Details</h4>
     <div class="form-group" ng-class="{'has-error': errors.rule_id}">
-      <label for="id_rule_id">ID or Alias:</label>
+      <label for="id_rule_id">ID or Alias</label>
       <input type="text" class="form-control" id="id_rule_id" ng-model="sc.rule_id">
       <p class="help-block" ng-show="errors.rule_id">{{ errors.rule_id.join(', ') }}</p>
     </div>
