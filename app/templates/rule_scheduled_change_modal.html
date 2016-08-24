@@ -6,7 +6,7 @@
   <form role="form">
     <div>Scheduled Change Details:</div>
     <label for="id_when">When</label>
-    <div class="form-group dropdown" ng-class="{'has-error': errors.when}">
+    <div id="dropdown" class="form-group dropdown" ng-class="{'has-error': errors.when}">
         <!-- TODO: why doesn't it close properly? -->
         <!-- this seems to be caused by an old version of ui.bootstrap. can't upgrade it without upgrading angular though -->
           <div class="input-group">
@@ -17,8 +17,8 @@
             <span class="input-group-btn"><button class="btn btn-secondary" type="button" ng-click="clearWhen()">Clear</button></span>
           </div>
       <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-        <datetimepicker data-ng-model="sc.when" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minuteStep: 15 }"
-                        data-on-set-time="validateWhen(newDate)" />
+        <datetimepicker data-ng-model="sc.when" data-datetimepicker-config="{ minuteStep: 15 }"
+                        data-on-set-time="setWhen(newDate)" />
       </ul>
       <p class="help-block" ng-show="errors.when">{{ errors.when.join(', ') }}</p>
     </div>
