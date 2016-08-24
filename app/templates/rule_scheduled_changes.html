@@ -85,8 +85,9 @@
     </div>
 
     <dl class="dl-horizontal" style="float:right">
-      <dt ng-show="sc.rule_id">Rule ID:</dt>
-      <dd>{{ sc.rule_id }}</dd>
+      <dt>Rule ID:</dt>
+      <dd ng-show="sc.rule_id">{{ sc.rule_id }}</dd>
+      <dd ng-show="!sc.rule_id">New!</dd>
       <dt ng-show="sc.data_version">Data Version:</dt>
       <dd>{{ sc.data_version }}</dd>
       <dt ng-show="sc.mapping">Mapping:</dt>
