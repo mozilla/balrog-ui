@@ -21,9 +21,12 @@ function ($scope, $modalInstance, CSRF, Rules, Releases, sc) {
   $scope.errors = {};
   $scope.saving = false;
 
-  $scope.validateWhen = function(newDate) {
+  $scope.setWhen = function(newDate) {
+    $("#dropdown")[0].classList.remove("open");
+    $("#dropdown2")[0].setAttribute("aria-expanded", "false");
     if (newDate <= new Date()) {
       $scope.errors.when = ["Scheduled time cannot be in the past"];
+      $scope.sc.when = null;
     }
     else {
       $scope.errors.when = null;
