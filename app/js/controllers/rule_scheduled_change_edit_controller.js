@@ -26,7 +26,7 @@ function ($scope, $modalInstance, CSRF, Rules, Releases, sc) {
     $("#dropdown2")[0].setAttribute("aria-expanded", "false");
     if (newDate <= new Date()) {
       $scope.errors.when = ["Scheduled time cannot be in the past"];
-      $scope.sc.when = null;
+      $scope.sc.when = $scope.original_sc.when;
     }
     else {
       $scope.errors.when = null;
