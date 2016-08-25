@@ -75,6 +75,7 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
             backgroundRate: 0,
             priority: 0,
             update_type: 'minor',
+            when: null,
           };
         }
       }
