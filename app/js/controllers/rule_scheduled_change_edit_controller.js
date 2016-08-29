@@ -20,8 +20,10 @@ function ($scope, $modalInstance, CSRF, Rules, Releases, sc) {
   $scope.sc = angular.copy(sc);
   $scope.errors = {};
   $scope.saving = false;
+  $scope.calendar_is_open = false;
 
   $scope.setWhen = function(newDate) {
+    $scope.calendar_is_open = false;
     if (newDate <= new Date()) {
       $scope.errors.when = ["Scheduled time cannot be in the past"];
       $scope.sc.when = $scope.original_sc.when;

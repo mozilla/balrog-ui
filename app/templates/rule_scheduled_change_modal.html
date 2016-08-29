@@ -8,14 +8,16 @@
     <div class="xor-group">
       <div>
         <label for="id_when">When</label>
-        <div class="form-group dropdown" dropdown on-toggle="toggled(open)" ng-class="{'has-error': errors.when}">
-              <div class="input-group">
-                <span class="input-group-btn dropdown-toggle" dropdown-toggle>
-                    <button class="btn btn-secondary" type="button"><i class="glyphicon glyphicon-calendar"></i></button>
-                </span>
-                <input type="text" id="id_when" class="form-control" data-ng-model="sc.when">
-                <span class="input-group-btn"><button class="btn btn-secondary" type="button" ng-click="clearWhen()">Clear</button></span>
-              </div>
+        <div class="form-group" dropdown is-open="calendar_is_open" ng-class="{'has-error': errors.when}">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button class="btn btn-secondary dropdown-toggle" type="button"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            <input type="text" id="id_when" class="form-control" data-ng-model="sc.when">
+            <span class="input-group-btn">
+              <button class="btn btn-secondary" type="button" ng-click="clearWhen()">Clear</button>
+            </span>
+          </div>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
             <datetimepicker data-ng-model="sc.when" data-datetimepicker-config="{ minuteStep: 15 }"
                             data-on-set-time="setWhen(newDate)" />
