@@ -8,9 +8,9 @@
     <div class="xor-group">
       <div>
         <label for="id_when">When</label>
-        <div id="dropdown" class="form-group dropdown" ng-class="{'has-error': errors.when}">
+        <div class="form-group dropdown" dropdown on-toggle="toggled(open)" ng-class="{'has-error': errors.when}">
               <div class="input-group">
-                <span class="input-group-btn dropdown-toggle" id="dropdown2" data-toggle="dropdown">
+                <span class="input-group-btn dropdown-toggle" dropdown-toggle>
                     <button class="btn btn-secondary" type="button"><i class="glyphicon glyphicon-calendar"></i></button>
                 </span>
                 <input type="text" id="id_when" class="form-control" data-ng-model="sc.when">
