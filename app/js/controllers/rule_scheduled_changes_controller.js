@@ -6,7 +6,12 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
 
   Rules.getScheduledChanges()
   .success(function(response) {
-    $scope.scheduled_changes = response.scheduled_changes;
+    $scope.scheduled_changes = response.scheduled_changes.map(function(sc) {
+      if (sc.when !== null) {
+        sc.when = new Date(sc.when);
+      }
+      return sc;
+    });
   })
   .error(function() {
     console.error(arguments);
