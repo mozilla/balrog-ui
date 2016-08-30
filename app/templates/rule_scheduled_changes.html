@@ -65,7 +65,7 @@
         Scheduled By: <b>{{ sc.scheduled_by }}</b>
       </h5>
       <h5 ng-show="sc.when" title="When">
-        When: <b><span moment="sc.when"></span></b>
+        When: <b><span ng-bind-html="formatMoment(sc.when)"></span></b>
       </h5>
       <h5 ng-show="sc.telemetry_product" title="Telemetry Product">
         Telemetry Product: <b>{{ sc.telemetry_product }}</b>
