@@ -6,6 +6,8 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
 
   Rules.getScheduledChanges()
   .success(function(response) {
+    // "when" is a unix timestamp, but it's much easier to work with Date objects,
+    // so we convert it to that before rendering.
     $scope.scheduled_changes = response.scheduled_changes.map(function(sc) {
       if (sc.when !== null) {
         sc.when = new Date(sc.when);
