@@ -26,7 +26,7 @@ describe("controller: RuleScheduledChangesController", function() {
       {
         "sc_id": 1,
         "scheduled_by": "anna",
-        "when": 1234,
+        "when": new Date(1234),
         "complete": false,
         "telemetry_product": null,
         "telemetry_channel": null,
@@ -195,7 +195,7 @@ describe("controller: RuleScheduledChangesController", function() {
 
     it("should be possible to open the delete modal", function() {
       this.$httpBackend.expectGET("/api/scheduled_changes/rules?all=1")
-      .respond(200, JSON.stringify(sample_sc.scheduled_changes[0]));
+      .respond(200, JSON.stringify(sample_sc));
       this.$httpBackend.flush();
 
       this.scope.openDeleteModal();
