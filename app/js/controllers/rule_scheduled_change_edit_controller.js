@@ -21,6 +21,13 @@ function ($scope, $modalInstance, CSRF, Rules, Releases, sc) {
   $scope.errors = {};
   $scope.saving = false;
   $scope.calendar_is_open = false;
+  $scope.sc_type = "time";
+
+  $scope.toggleType = function(newType) {
+    $scope.sc_type = newType;
+    $("#btn_telemetry").toggleClass("active");
+    $("#btn_time").toggleClass("active");
+  };
 
   $scope.setWhen = function(newDate) {
     if (!newDate) {
