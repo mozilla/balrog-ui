@@ -14,8 +14,13 @@ function ($scope, $modalInstance, CSRF, Rules, sc, scheduled_changes) {
         $scope.scheduled_changes.splice($scope.scheduled_changes.indexOf($scope.sc), 1);
         $modalInstance.close();
       })
-      .error(function() {
-        console.error(arguments);
+      .error(function(response) {
+        if (typeof response === 'object') {
+          sweetAlert(
+            "Form submission error",
+            response.exception
+          );
+        }
       })
       .finally(function() {
         $scope.saving = false;
