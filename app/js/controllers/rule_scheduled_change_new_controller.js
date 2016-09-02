@@ -21,6 +21,10 @@ function($scope, $http, $modalInstance, CSRF, Releases, Rules, scheduled_changes
   $scope.calendar_is_open = false;
 
   $scope.setWhen = function(newDate) {
+    if (!newDate) {
+      newDate = new Date($("#id_when")[0].value);
+      $scope.sc.when = newDate;
+    }
     $scope.calendar_is_open = false;
     if (newDate <= new Date()) {
       $scope.errors.when = ["Scheduled time cannot be in the past"];
