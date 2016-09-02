@@ -78,7 +78,7 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
     var modalInstance = $modal.open({
       templateUrl: 'rule_scheduled_change_modal.html',
       controller: 'NewRuleScheduledChangeCtrl',
-      // size: 'sm',
+      size: 'lg',
       resolve: {
         scheduled_changes: function() {
           return $scope.scheduled_changes;
@@ -101,6 +101,7 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
     var modalInstance = $modal.open({
       templateUrl: "rule_scheduled_change_modal.html",
       controller: "EditRuleScheduledChangeCtrl",
+      size: 'lg',
       resolve: {
         sc: function() {
           sc.when = new Date(sc.when);
