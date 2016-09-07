@@ -19,6 +19,13 @@ function($scope, $http, $modalInstance, CSRF, Releases, Rules, scheduled_changes
   $scope.errors = {};
   $scope.saving = false;
   $scope.calendar_is_open = false;
+  $scope.sc_type = "time";
+
+  $scope.toggleType = function(newType) {
+    $scope.sc_type = newType;
+    $("#btn_telemetry").toggleClass("active");
+    $("#btn_time").toggleClass("active");
+  };
 
   $scope.setWhen = function(newDate) {
     if (!newDate) {
@@ -46,6 +53,14 @@ function($scope, $http, $modalInstance, CSRF, Releases, Rules, scheduled_changes
     CSRF.getToken()
     .then(function(csrf_token) {
       sc = angular.copy($scope.sc);
+      if ($scope.sc_type === "time") {
+        sc.telemetry_product = null;
+        sc.telemetry_channel = null;
+        sc.telemetry_uptake = null;
+      }
+      else {
+        sc.when = null;
+      }
       Rules.addScheduledChange(sc, csrf_token)
       .success(function(response) {
         $scope.sc.sc_data_version = 1;

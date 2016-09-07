@@ -54,6 +54,14 @@ function ($scope, $modalInstance, CSRF, Rules, Releases, sc) {
 
     CSRF.getToken()
     .then(function(csrf_token) {
+      if ($scope.sc_type === "time") {
+        $scope.sc.telemetry_product = null;
+        $scope.sc.telemetry_channel = null;
+        $scope.sc.telemetry_uptake = null;
+      }
+      else {
+        $scope.sc.when = null;
+      }
       Rules.updateScheduledChange($scope.sc.sc_id, $scope.sc, csrf_token)
       .success(function(response) {
         $scope.sc.sc_data_version = response.new_data_version;
