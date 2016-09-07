@@ -8,7 +8,7 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
   $scope.pr_ch_options = ["All rules"];
 
   $scope.currentPage = 1;
-  $scope.pageSize = 10;
+  $scope.pageSize = 20;
   $scope.maxSize = 10;
   $scope.rules = [];
 
@@ -222,7 +222,7 @@ function($scope, $routeParams, $location, $timeout, Rules, Search, $modal, $rout
     var modalInstance = $modal.open({
       templateUrl: 'rule_modal.html',
       controller: 'NewRuleCtrl',
-      // size: 'sm',
+      size: 'lg',
       resolve: {
         rules: function() {
           return $scope.rules;
