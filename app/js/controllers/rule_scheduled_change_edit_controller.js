@@ -54,18 +54,19 @@ function ($scope, $modalInstance, CSRF, Rules, Releases, sc) {
 
     CSRF.getToken()
     .then(function(csrf_token) {
+      sc = angular.copy($scope.sc);
       if ($scope.sc_type === "time") {
-        $scope.sc.telemetry_product = null;
-        $scope.sc.telemetry_channel = null;
-        $scope.sc.telemetry_uptake = null;
+        sc.telemetry_product = null;
+        sc.telemetry_channel = null;
+        sc.telemetry_uptake = null;
       }
       else {
-        $scope.sc.when = null;
+        sc.when = null;
       }
-      Rules.updateScheduledChange($scope.sc.sc_id, $scope.sc, csrf_token)
+      Rules.updateScheduledChange(sc.sc_id, sc, csrf_token)
       .success(function(response) {
-        $scope.sc.sc_data_version = response.new_data_version;
-        angular.copy($scope.sc, $scope.original_sc);
+        sc.sc_data_version = response.new_data_version;
+        angular.copy(sc, $scope.original_sc);
         $scope.saving = false;
         $modalInstance.close();
       })
