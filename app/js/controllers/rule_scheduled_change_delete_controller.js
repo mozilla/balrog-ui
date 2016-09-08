@@ -17,8 +17,11 @@ function ($scope, $modalInstance, CSRF, Rules, sc, scheduled_changes) {
       .error(function(response) {
         if (typeof response === 'object') {
           sweetAlert(
-            "Form submission error",
-            response.exception
+            {
+              title: "Form submission error",
+              text: response.exception
+            },
+            function() { $scope.cancel(); }
           );
         }
       })
