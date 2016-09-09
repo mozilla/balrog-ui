@@ -7,7 +7,8 @@
     <h4>Scheduled Change Details</h4>
     <div class="row text-center">
       <button id="btn_time" class="btn active" type="button" ng-click="toggleType('time')">Time Based</button>
-      <button id="btn_telemetry" class="btn" type="button" ng-click="toggleType('telemetry')">Telemetry Based</button>
+      <!-- Bootstrap disables them for "disabled" elements, but pointer events are forcibly enabled here to allow the tooltip to be shown. -->
+      <button id="btn_telemetry" class="btn disabled" style="pointer-events: auto" title="Not available yet" type="button" ng-click="toggleType('telemetry')">Telemetry Based</button>
     </div>
     <div class="row" ng-show="sc_type === 'time'">
       <div class="col-md-8 col-md-offset-2">
