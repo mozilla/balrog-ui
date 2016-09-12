@@ -1,40 +1,5 @@
 # Balrog UI
 
-[![Build Status](https://travis-ci.org/mozilla/balrog-ui.svg?branch=master)](https://travis-ci.org/mozilla/balrog-ui)
+[![You shall not pass](http://cdn.meme.am/instances/500x/62331333.jpg)](https://github.com/mozilla/balrog/tree/master/ui)
 
-This is the new Admin UI for [Balrog](https://github.com/mozilla/balrog).
-This code might be checked into Balrog proper one day.
-
-# Instructions
-
-To run you first need to install all the npm dependencies:
-
-    npm install
-
-You need [linemanjs](http://linemanjs.com/) to run it:
-
-    npm install -g lineman
-
-To run:
-
-    lineman run
-
-Then open `localhost:8000`.
-
-# Running Tests
-
-To run unit tests, you need to run two terminals. In one:
-
-    lineman run
-
-And in another:
-
-    lineman spec
-
-To run in CI:
-
-    lineman spec-ci
-
-## End-to-End Tests
-
-This is not yet developed.
+This repository has been moved into [a subfolder of balrog](https://github.com/mozilla/balrog/tree/master/ui). Please submit [your pull requests](https://github.com/mozilla/balrog/pulls) to that repo.
